@@ -79,6 +79,19 @@ def get_info_day(day):
                         need_sp.append(int(elem))
                 need_result.append(need_sp)
 
+        lens = need_result[1]
+        sp = need_result[2]
+        b = []
+        c = []
+        x = 0
+        for i in range(len(sp)):
+            c.append(sp[i])
+            if x == lens:
+                b.append(c)
+                c = []
+            x += 1
+        need_result[2] = b
+
         return need_result
 
     finally:
