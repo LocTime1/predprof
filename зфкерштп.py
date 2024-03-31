@@ -13,22 +13,34 @@ def get_info_about_date(date):
     a = requests.get(f'https://olimp.miet.ru/ppo_it_final?day={date[0]}&month={date[1]}&year={date[2]}',
                      headers=headers)
     b = a.json()['message']
-    print(b.keys())
     lst = [len(b['windows']['data'].keys()), len(b['windows']['data']['floor_1'])]
     win = []
     for i in b['windows']['data'].keys():
-
         win = win + b['windows']['data'][i]
     lst.append(win)
+    flat_count = b['windows_for_flat']['data']
+    lst.append(flat_count)
     return lst
 
 
+
+def rachet(lst):
+    cnt_room = len(lst[-1])
+    windows_with_light = []
+    i = 0
+    j = 0
+    pr = lst[-1][j]
+    b = []
+    while i != len(lst[2]):
+        if i != pr:
+            b.append(lst[2][i])
+            i += 1
+        else:
+            pr += lst[-1][j]
+    kv = 1
+        
+    
+    
 dates = get_dates()
-print(get_info_about_date(dates[7]))
-
-
-'''b = a.json()['message']
-for i in b.keys():
-    print(i)
-print(len(b['windows']['data'].keys()), len(b['windows']['data']['floor_1']))'''
-#b'{"message":["25-01-23","14-02-23","18-02-23","04-03-23","14-03-23","18-04-23","13-09-23","30-09-23","30-10-23"]}\n'
+for i in dates:
+    print(get_info_about_date(i))
