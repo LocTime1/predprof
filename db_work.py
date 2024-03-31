@@ -17,9 +17,7 @@ def add_day(data):
             )
         ''')
 
-    for elem in data:
-        elem = elem.split('-')
-        cursor.execute('INSERT INTO data_days (day, month, year) VALUES (?, ?, ?)', elem)
+    cursor.execute('INSERT INTO data_days (day, month, year) VALUES (?, ?, ?)', data.split('-'))
     result = cursor.fetchone()
 
     connect.commit()
@@ -87,4 +85,5 @@ def get_info_day(day):
         connection.close()
 
 
-print(get_info_day('14'))
+print(get_info_day('25-01-23'))
+
